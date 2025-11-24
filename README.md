@@ -19,12 +19,13 @@
 
 ## Запуск
 
-1. Собрать и запустить контейнеры:
+### 1. Собрать и запустить контейнеры
 
 ```bash
 docker-compose up --build
+```
 
-2. Эндпоинты
+## Эндпоинты
 
 - API доступно на http://localhost:8080
 - GET /questions/ — список всех вопросов.
@@ -37,12 +38,13 @@ docker-compose up --build
 
 ## Ручное тестирование API через curl
 
-1. Создать вопрос
+### 1. Создать вопрос
 
 ```bash
 curl -X POST http://localhost:8080/questions/ \
   -H "Content-Type: application/json" \
   -d '{"text": "Первый вопрос в системе?"}'
+```
 
 Ожидаемый ответ (201 created)
 
@@ -52,11 +54,13 @@ curl -X POST http://localhost:8080/questions/ \
   "text": "Первый вопрос в системе?",
   "created_at": "2025-11-24T10:00:00Z"
 }
+```
 
-2. Получить список всех вопросов
+### 2. Получить список всех вопросов
 
 ```bash
 curl http://localhost:8080/questions/
+```
 
 Ответ (200 ОК)
 
@@ -68,12 +72,13 @@ curl http://localhost:8080/questions/
     "created_at": "2025-11-24T10:00:00Z"
   }
 ]
+```
 
-
-3. Получить конкретный вопрос с ответами
+### 3. Получить конкретный вопрос с ответами
 
 ```bash
 curl http://localhost:8080/questions/1
+```
 
 Ответ (200 ОК). Если вопрос не найден — вернётся 404 Not Found
 
@@ -92,8 +97,9 @@ curl http://localhost:8080/questions/1
     }
   ]
 }
+```
 
-4. Добавить ответ к вопросу
+### 4. Добавить ответ к вопросу
 
 ```bash
 curl -X POST http://localhost:8080/questions/1/answers/ \
@@ -102,6 +108,7 @@ curl -X POST http://localhost:8080/questions/1/answers/ \
     "user_id": "8b70201b-7c1c-4f5d-9b48-9eaa9c68c111",
     "text": "Вот мой ответ на вопрос №1"
   }'
+```
 
 Ответ (201 created). Если вопрос с таким id не существует, сервер вернёт 400 Bad Request с сообщением о том, что вопрос не найден
 
@@ -113,11 +120,13 @@ curl -X POST http://localhost:8080/questions/1/answers/ \
   "text": "Вот мой ответ на вопрос №1",
   "created_at": "2025-11-24T10:05:00Z"
 }
+```
 
-5. Получить ответ по ID
+### 5. Получить ответ по ID
 
 ```bash
 curl http://localhost:8080/answers/1
+```
 
 Ответ (200 ОК). Если ответ не найден — 404 Not Found
 
@@ -129,10 +138,12 @@ curl http://localhost:8080/answers/1
   "text": "Вот мой ответ на вопрос №1",
   "created_at": "2025-11-24T10:05:00Z"
 }
+```
 
-6. Удалить ответ
+### 6. Удалить ответ
 
 ```bash
 curl -X DELETE http://localhost:8080/answers/1 -v
+```
 
 Ответ (204 No Content)
